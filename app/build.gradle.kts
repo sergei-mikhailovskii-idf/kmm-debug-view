@@ -48,7 +48,7 @@ android {
 }
 
 dependencies {
-    implementation(project(":presentation"))
+    implementation(project(":debug_view"))
     implementation(libs.core.ktx)
     implementation(libs.lifecycle.runtime.ktx)
     implementation(libs.activity.compose)
