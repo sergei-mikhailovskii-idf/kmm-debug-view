@@ -7,5 +7,5 @@ import kotlinx.coroutines.flow.Flow
 
 internal interface LogRepository {
     suspend fun saveLog(type: LogType, message: String)
-    suspend fun readLogs(): Flow<ResultsChange<Log>>
+    fun readLogs(): Flow<ResultsChange<Log>>
 }

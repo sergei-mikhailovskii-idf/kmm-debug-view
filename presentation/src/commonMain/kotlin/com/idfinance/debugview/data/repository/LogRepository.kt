@@ -11,10 +11,8 @@ internal class LogRepository(
 ) : LogRepository {
 
     override suspend fun saveLog(type: LogType, message: String) {
-        realm.write {
-            copyToRealm(Log(message, type))
-        }
+        realm.write { copyToRealm(Log(message, type)) }
     }
 
-    override suspend fun readLogs() = realm.query<Log>().find().asFlow()
+    override fun readLogs() = realm.query<Log>().find().asFlow()
 }

@@ -5,7 +5,7 @@ import androidx.compose.runtime.Composable
 import com.idfinance.debugview.presentation.decompose.DefaultDebugComponent
 
 @Composable
-fun DebugViewTheme(
+internal fun DebugViewTheme(
     component: DefaultDebugComponent,
     content: @Composable () -> Unit
 ) {

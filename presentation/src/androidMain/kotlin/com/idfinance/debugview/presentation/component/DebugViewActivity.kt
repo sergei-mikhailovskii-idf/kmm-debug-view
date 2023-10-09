@@ -12,7 +12,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.ui.Modifier
 import com.arkivanov.decompose.defaultComponentContext
-import com.idfinance.debugview.presentation.decompose.DefaultDebugComponent
+import com.idfinance.debugview.ServiceLocator
 import com.idfinance.debugview.presentation.ui.theme.DebugViewTheme
 
 fun openDebugView(context: Context) {
@@ -25,7 +25,7 @@ class DebugViewActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val root = DefaultDebugComponent(defaultComponentContext())
+        val root = ServiceLocator.getRootComponent(defaultComponentContext())
         setContent {
             DebugViewTheme(root) {
                 Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
