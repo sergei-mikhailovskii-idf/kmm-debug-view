@@ -7,11 +7,12 @@ internal class SaveLogUseCase(
     private val repository: LogRepository
 ) {
     suspend operator fun invoke(payload: Payload) {
-        repository.saveLog(payload.type, payload.message)
+        repository.saveLog(payload.type, payload.tag, payload.message)
     }
 
     class Payload(
         val type: LogType,
+        val tag: String,
         val message: String
     )
 }

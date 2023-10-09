@@ -8,10 +8,12 @@ import org.mongodb.kbson.ObjectId
 internal class Log() : RealmObject {
     @PrimaryKey
     var _id = ObjectId()
+    var tag: String = ""
     var message: String = ""
     var isError: Boolean = false
 
-    constructor(message: String = "", type: LogType = LogType.DEFAULT) : this() {
+    constructor(tag: String = "", message: String = "", type: LogType = LogType.DEFAULT) : this() {
+        this.tag = tag
         this.message = message
         this.isError = type == LogType.ERROR
     }

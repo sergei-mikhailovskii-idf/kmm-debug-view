@@ -5,10 +5,10 @@ import com.idfinance.debugview.domain.usecase.SaveLogUseCase
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 
-fun handleLog(type: LogType, message: String) {
+fun handleLog(type: LogType, tag: String, message: String) {
     val useCase = ServiceLocator.saveLogUseCase
     MainScope().launch {
-        useCase(SaveLogUseCase.Payload(type, message))
+        useCase(SaveLogUseCase.Payload(type, tag, message))
     }
 }
 
