@@ -2,6 +2,7 @@ plugins {
     kotlin("multiplatform")
     id("com.android.library")
     id("org.jetbrains.compose")
+    id("io.realm.kotlin") version "1.11.0"
 }
 
 kotlin {
@@ -30,6 +31,7 @@ kotlin {
             dependencies {
                 implementation(compose.runtime)
                 implementation(compose.material3)
+                implementation(libs.realm)
             }
         }
         val commonTest by getting {
