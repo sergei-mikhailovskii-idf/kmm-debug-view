@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "com.idfinance.kmm"
-version = "0.0.1"
+version = "0.0.2"
 
 kotlin {
     androidTarget {
@@ -16,6 +16,7 @@ kotlin {
                 jvmTarget = "1.8"
             }
         }
+        publishLibraryVariants("release", "debug")
     }
     ios()
     iosSimulatorArm64()
