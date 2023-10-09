@@ -40,7 +40,7 @@ internal fun LogView(component: DebugComponent) {
 private fun getAttributedLog(log: Log): AnnotatedString {
     val fullMessage = "[${log.tag}] ${log.message}"
     val builder = AnnotatedString.Builder(fullMessage)
-    val endTagIndex = fullMessage.indexOfFirst { it == ']' }
+    val endTagIndex = fullMessage.indexOfFirst { it == ']' } + 1
     builder.addStyle(SpanStyle(Color.Blue), 0, endTagIndex)
     return builder.toAnnotatedString()
 }
