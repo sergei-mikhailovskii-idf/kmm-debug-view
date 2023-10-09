@@ -5,6 +5,7 @@ import com.arkivanov.decompose.value.MutableValue
 import com.arkivanov.decompose.value.Value
 import com.arkivanov.essenty.lifecycle.doOnStart
 import com.arkivanov.essenty.lifecycle.doOnStop
+import com.idfinance.debugview.domain.usecase.ClearLogsUseCase
 import com.idfinance.debugview.domain.usecase.GetLogsFlowUseCase
 import com.idfinance.debugview.presentation.extensions.disposableScope
 import kotlinx.coroutines.CoroutineScope
@@ -14,7 +15,8 @@ import kotlinx.coroutines.launch
 
 internal class DefaultDebugComponent(
     context: ComponentContext,
-    getLogsFlowUseCase: GetLogsFlowUseCase
+    getLogsFlowUseCase: GetLogsFlowUseCase,
+    private val clearLogsUseCase: ClearLogsUseCase
 ) : DebugComponent, ComponentContext by context,
     CoroutineScope by context.disposableScope() {
 
@@ -34,12 +36,9 @@ internal class DefaultDebugComponent(
         lifecycle.doOnStop {
             logsFlowJob?.cancel()
         }
-//        launch {
-//            val useCase = ServiceLocator.saveLogUseCase
-//            for (i in 0..100) {
-//                useCase(SaveLogUseCase.Payload(LogType.DEFAULT, "Log$i"))
-//                delay(100)
-//            }
-//        }
+    }
+
+    override fun clearLogs() {
+        launch { clearLogsUseCase() }
     }
 }

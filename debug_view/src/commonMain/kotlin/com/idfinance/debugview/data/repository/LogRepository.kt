@@ -15,4 +15,7 @@ internal class LogRepository(
     }
 
     override fun readLogs() = realm.query<Log>().find().asFlow()
+    override suspend fun clearLogs() {
+        realm.write { deleteAll() }
+    }
 }

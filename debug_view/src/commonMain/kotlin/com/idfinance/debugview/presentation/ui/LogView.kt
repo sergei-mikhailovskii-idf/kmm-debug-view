@@ -1,12 +1,14 @@
 package com.idfinance.debugview.presentation.ui
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ContentCopy
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -35,8 +37,13 @@ internal fun LogView(component: DebugComponent) {
     Scaffold(
         floatingActionButton = {
             val clipboardManager = LocalClipboardManager.current
-            FloatingActionButton(onClick = { clipboardManager.setText(AnnotatedString(model.concatenatedLog)) }) {
-                Image(Icons.Default.ContentCopy, null)
+            Column {
+                FloatingActionButton(onClick = component::clearLogs) {
+                    Image(Icons.Default.Delete, null)
+                }
+                FloatingActionButton(onClick = { clipboardManager.setText(AnnotatedString(model.concatenatedLog)) }) {
+                    Image(Icons.Default.ContentCopy, null)
+                }
             }
         }
     ) {
