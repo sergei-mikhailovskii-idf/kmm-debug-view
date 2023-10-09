@@ -46,7 +46,7 @@ kotlin {
 }
 
 android {
-    namespace = "com.idfinance.debugview.presentation"
+    namespace = "com.idfinance.debugview"
     compileSdk = 33
     defaultConfig {
         minSdk = 21
