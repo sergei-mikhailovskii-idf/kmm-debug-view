@@ -11,6 +11,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.ui.Modifier
+import com.arkivanov.decompose.defaultComponentContext
+import com.idfinance.debugview.presentation.decompose.DefaultDebugComponent
 import com.idfinance.debugview.presentation.ui.theme.DebugViewTheme
 
 fun openDebugView(context: Context) {
@@ -23,8 +25,9 @@ class DebugViewActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val root = DefaultDebugComponent(defaultComponentContext())
         setContent {
-            DebugViewTheme {
+            DebugViewTheme(root) {
                 Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
                     LazyColumn {
                         items(100) { index ->

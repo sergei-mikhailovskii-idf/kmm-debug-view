@@ -32,6 +32,8 @@ kotlin {
                 implementation(compose.runtime)
                 implementation(compose.material3)
                 implementation(libs.realm)
+                implementation(libs.decomposeCompose)
+                implementation(libs.decompose)
             }
         }
         val commonTest by getting {
@@ -49,7 +51,7 @@ kotlin {
 
 android {
     namespace = "com.idfinance.debugview"
-    compileSdk = 33
+    compileSdk = 34
     defaultConfig {
         minSdk = 21
     }

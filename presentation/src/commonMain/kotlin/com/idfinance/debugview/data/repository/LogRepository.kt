@@ -12,10 +12,7 @@ internal class LogRepository(
 
     override suspend fun saveLog(type: LogType, message: String) {
         realm.write {
-            copyToRealm(Log().apply {
-                this.type = type
-                this.message = message
-            })
+            copyToRealm(Log(message, type))
         }
     }
 
