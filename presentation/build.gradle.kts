@@ -3,7 +3,11 @@ plugins {
     id("com.android.library")
     id("org.jetbrains.compose")
     id("io.realm.kotlin") version "1.11.0"
+    id("maven-publish")
 }
+
+group = "com.idfinance.kmm"
+version = "0.0.1"
 
 kotlin {
     androidTarget {
@@ -54,5 +58,26 @@ android {
     compileSdk = 34
     defaultConfig {
         minSdk = 21
+    }
+}
+
+publishing {
+    publications {
+        matching { it.name in listOf("iosArm64", "iosX64", "kotlinMultiplatform") }.all {
+            val targetPublication = this@all
+            tasks.withType<AbstractPublishToMaven>()
+                .matching { it.publication == targetPublication }
+                .configureEach { onlyIf { findProperty("isMainHost") == "true" } }
+        }
+    }
+    repositories {
+        maven {
+            name = "kmm-debug-view"
+            url = uri("https://maven.pkg.github.com/sergei-mikhailovskii-idf/kmm-debug-view")
+            credentials {
+                username = System.getenv("GITHUB_USER")
+                password = System.getenv("GITHUB_API_KEY")
+            }
+        }
     }
 }
