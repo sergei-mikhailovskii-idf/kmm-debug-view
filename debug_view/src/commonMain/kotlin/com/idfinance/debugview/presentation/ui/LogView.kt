@@ -1,15 +1,21 @@
 package com.idfinance.debugview.presentation.ui
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ContentCopy
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.unit.dp
@@ -26,13 +32,22 @@ internal fun LogView(component: DebugComponent) {
         state.animateScrollToItem(maxOf(model.logs.size - 1, 0))
     }
 
-    LazyColumn(state = state) {
-        items(model.logs) {
-            Text(
-                getAttributedLog(it),
-                modifier = Modifier.padding(16.dp),
-                color = if (it.isError) Color.Red else Color.Black
-            )
+    Scaffold(
+        floatingActionButton = {
+            val clipboardManager = LocalClipboardManager.current
+            FloatingActionButton(onClick = { clipboardManager.setText(AnnotatedString(model.concatenatedLog)) }) {
+                Image(Icons.Default.ContentCopy, null)
+            }
+        }
+    ) {
+        LazyColumn(state = state) {
+            items(model.logs) {
+                Text(
+                    getAttributedLog(it),
+                    modifier = Modifier.padding(16.dp),
+                    color = if (it.isError) Color.Red else Color.Black
+                )
+            }
         }
     }
 }

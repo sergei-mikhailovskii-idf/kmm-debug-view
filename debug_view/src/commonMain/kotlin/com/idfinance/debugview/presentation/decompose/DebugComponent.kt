@@ -6,5 +6,8 @@ import com.idfinance.debugview.data.model.Log
 internal interface DebugComponent {
     val model: Value<Model>
 
-    data class Model(val logs: List<Log> = emptyList())
+    data class Model(val logs: List<Log> = emptyList()) {
+        val concatenatedLog: String
+            get() = logs.joinToString("\n") { "[${it.tag}] it.message" }
+    }
 }
