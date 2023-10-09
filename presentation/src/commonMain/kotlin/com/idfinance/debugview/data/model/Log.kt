@@ -9,10 +9,10 @@ internal class Log() : RealmObject {
     @PrimaryKey
     var _id = ObjectId()
     var message: String = ""
-    var type: String = LogType.DEFAULT.name
+    var isError: Boolean = false
 
     constructor(message: String = "", type: LogType = LogType.DEFAULT) : this() {
         this.message = message
-        this.type = type.name
+        this.isError = type == LogType.ERROR
     }
 }

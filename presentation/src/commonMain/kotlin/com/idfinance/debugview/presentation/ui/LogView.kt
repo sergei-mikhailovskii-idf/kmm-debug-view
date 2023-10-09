@@ -7,6 +7,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.graphics.Color
 import com.arkivanov.decompose.extensions.compose.jetbrains.subscribeAsState
 import com.idfinance.debugview.presentation.decompose.DebugComponent
 
@@ -21,7 +22,7 @@ internal fun LogView(component: DebugComponent) {
 
     LazyColumn(state = state) {
         items(model.logs) {
-            Text(it.message)
+            Text(it.message, color = if (it.isError) Color.Red else Color.Black)
         }
     }
 }
