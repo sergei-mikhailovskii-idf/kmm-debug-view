@@ -4,11 +4,12 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ContentCopy
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material3.Divider
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -19,6 +20,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
 import com.arkivanov.decompose.extensions.compose.jetbrains.subscribeAsState
 import com.idfinance.debugview.data.model.Log
@@ -52,11 +55,14 @@ internal fun LogView(component: DebugComponent) {
         }
     ) {
         LazyColumn(state = state, verticalArrangement = Arrangement.spacedBy(12.dp)) {
-            items(model.logs) {
+            itemsIndexed(model.logs) { index, it ->
                 Text(
                     getAttributedLog(it),
-                    color = if (it.isError) Color.Red else Color.Black
+                    color = if (it.isError) Color.Red else Color.Black,
+                    fontSize = TextUnit(12F, TextUnitType.Sp)
                 )
+                if (index < model.logs.lastIndex)
+                    Divider(color = Color.Black, thickness = 1.dp)
             }
         }
     }
