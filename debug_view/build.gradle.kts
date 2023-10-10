@@ -40,6 +40,7 @@ kotlin {
                 implementation(libs.realm)
                 implementation(libs.decomposeCompose)
                 implementation(libs.decompose)
+                implementation(libs.datetime)
             }
         }
         val commonTest by getting {

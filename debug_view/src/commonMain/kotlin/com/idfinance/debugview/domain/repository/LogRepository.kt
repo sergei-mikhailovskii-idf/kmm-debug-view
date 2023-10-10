@@ -6,7 +6,7 @@ import io.realm.kotlin.notifications.ResultsChange
 import kotlinx.coroutines.flow.Flow
 
 internal interface LogRepository {
-    suspend fun saveLog(type: LogType, tag: String, message: String)
+    suspend fun saveLog(type: LogType, tag: String, message: String, time: Long)
     fun readLogs(): Flow<ResultsChange<Log>>
     suspend fun clearLogs()
 }

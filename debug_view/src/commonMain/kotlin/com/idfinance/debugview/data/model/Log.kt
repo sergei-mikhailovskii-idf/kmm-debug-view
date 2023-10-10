@@ -11,10 +11,12 @@ internal class Log() : RealmObject {
     var tag: String = ""
     var message: String = ""
     var isError: Boolean = false
+    var time: Long = 0
 
-    constructor(tag: String = "", message: String = "", type: LogType = LogType.DEFAULT) : this() {
+    constructor(tag: String = "", message: String = "", type: LogType = LogType.DEFAULT, time: Long = 0) : this() {
         this.tag = tag
         this.message = message
         this.isError = type == LogType.ERROR
+        this.time = time
     }
 }

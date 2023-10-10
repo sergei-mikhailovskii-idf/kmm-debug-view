@@ -1,8 +1,8 @@
 package com.idfinance.debugview.presentation.ui
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -15,7 +15,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.text.AnnotatedString
@@ -24,6 +23,9 @@ import androidx.compose.ui.unit.dp
 import com.arkivanov.decompose.extensions.compose.jetbrains.subscribeAsState
 import com.idfinance.debugview.data.model.Log
 import com.idfinance.debugview.presentation.decompose.DebugComponent
+import kotlinx.datetime.Instant
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toLocalDateTime
 
 @Composable
 internal fun LogView(component: DebugComponent) {
@@ -37,7 +39,9 @@ internal fun LogView(component: DebugComponent) {
     Scaffold(
         floatingActionButton = {
             val clipboardManager = LocalClipboardManager.current
-            Column {
+            Column(
+                verticalArrangement = Arrangement.spacedBy(12.dp)
+            ) {
                 FloatingActionButton(onClick = component::clearLogs) {
                     Image(Icons.Default.Delete, null)
                 }
@@ -47,11 +51,10 @@ internal fun LogView(component: DebugComponent) {
             }
         }
     ) {
-        LazyColumn(state = state) {
+        LazyColumn(state = state, verticalArrangement = Arrangement.spacedBy(12.dp)) {
             items(model.logs) {
                 Text(
                     getAttributedLog(it),
-                    modifier = Modifier.padding(16.dp),
                     color = if (it.isError) Color.Red else Color.Black
                 )
             }
@@ -60,9 +63,11 @@ internal fun LogView(component: DebugComponent) {
 }
 
 private fun getAttributedLog(log: Log): AnnotatedString {
-    val fullMessage = "[${log.tag}] ${log.message}"
+    val time = Instant.fromEpochMilliseconds(log.time).toLocalDateTime(TimeZone.currentSystemDefault()).time
+    val formattedTime = "${time.hour}:${time.minute}:${time.second}"
+    val fullMessage = "[${log.tag}][${formattedTime}] ${log.message}"
     val builder = AnnotatedString.Builder(fullMessage)
-    val endTagIndex = fullMessage.indexOfFirst { it == ']' } + 1
+    val endTagIndex = fullMessage.indexOf(log.tag) + log.tag.length + 1
     builder.addStyle(SpanStyle(Color.Blue), 0, endTagIndex)
     return builder.toAnnotatedString()
 }

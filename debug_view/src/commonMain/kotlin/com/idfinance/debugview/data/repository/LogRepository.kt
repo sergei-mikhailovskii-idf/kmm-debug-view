@@ -10,8 +10,8 @@ internal class LogRepository(
     private val realm: Realm
 ) : LogRepository {
 
-    override suspend fun saveLog(type: LogType, tag: String, message: String) {
-        realm.write { copyToRealm(Log(tag, message, type)) }
+    override suspend fun saveLog(type: LogType, tag: String, message: String, time: Long) {
+        realm.write { copyToRealm(Log(tag, message, type, time)) }
     }
 
     override fun readLogs() = realm.query<Log>().find().asFlow()
