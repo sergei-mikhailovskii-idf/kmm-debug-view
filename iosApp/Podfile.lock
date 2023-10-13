@@ -1,5 +1,5 @@
 PODS:
-  - DebugView (0.0.8)
+  - DebugView (0.0.9)
 
 DEPENDENCIES:
   - DebugView (from `../DebugView`)
@@ -9,7 +9,7 @@ EXTERNAL SOURCES:
     :path: "../DebugView"
 
 SPEC CHECKSUMS:
-  DebugView: fd7591c21a8df790a8ca5a5eb290cacde03b2bd0
+  DebugView: 7698403304bfd0f7d1faabdd5e4b078ca86703a8
 
 PODFILE CHECKSUM: 6120661d24afc40824a2c82e53d0898b6692fda9
 
