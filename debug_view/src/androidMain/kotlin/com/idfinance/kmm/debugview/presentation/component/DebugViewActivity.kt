@@ -10,9 +10,12 @@ import com.idfinance.kmm.debugview.ServiceLocator
 import com.idfinance.kmm.debugview.presentation.ui.LogView
 
 fun openDebugView(context: Context) {
-    context.startActivity(Intent(context, DebugViewActivity::class.java).apply {
-        flags += Intent.FLAG_ACTIVITY_NEW_TASK
-    })
+    context.startActivity(
+        Intent(context, DebugViewActivity::class.java)
+            .apply {
+                flags += Intent.FLAG_ACTIVITY_NEW_TASK
+            },
+    )
 }
 
 class DebugViewActivity : ComponentActivity() {
