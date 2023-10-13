@@ -1,5 +1,6 @@
 plugins {
     kotlin("multiplatform")
+    kotlin("native.cocoapods")
     id("com.android.library")
     id("org.jetbrains.compose")
     id("io.realm.kotlin") version "1.11.0"
@@ -7,29 +8,12 @@ plugins {
 }
 
 group = "com.idfinance.kmm"
-version = "0.0.5"
+version = "0.0.7"
 
 kotlin {
-    androidTarget {
-        compilations.all {
-            kotlinOptions {
-                jvmTarget = "1.8"
-            }
-        }
-        publishLibraryVariants("release", "debug")
-    }
+    androidTarget { publishLibraryVariants("release", "debug") }
     ios()
     iosSimulatorArm64()
-
-    listOf(
-        iosX64(),
-        iosArm64(),
-        iosSimulatorArm64()
-    ).forEach {
-        it.binaries.framework {
-            baseName = "DebugView"
-        }
-    }
 
     sourceSets {
         val commonMain by getting {
@@ -54,10 +38,26 @@ kotlin {
             }
         }
     }
+
+    cocoapods {
+        ios.deploymentTarget = "12.0"
+        summary = "Debug View"
+        homepage = "https://idfinance.com/"
+
+        framework {
+            baseName = "behaviour_tracker"
+        }
+    }
 }
 
 android {
-    namespace = "com.idfinance.debugview"
+    publishing {
+        singleVariant("release") {
+            withSourcesJar()
+            withJavadocJar()
+        }
+    }
+    namespace = "com.idfinance.kmm.debugview"
     compileSdk = 34
     defaultConfig {
         minSdk = 21
