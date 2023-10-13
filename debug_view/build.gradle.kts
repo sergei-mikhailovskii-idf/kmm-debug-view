@@ -45,7 +45,7 @@ kotlin {
         homepage = "https://idfinance.com/"
 
         framework {
-            baseName = "behaviour_tracker"
+            baseName = "debug_view"
         }
     }
 }

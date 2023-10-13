@@ -6,14 +6,14 @@ Pod::Spec.new do |spec|
     spec.authors                  = ''
     spec.license                  = ''
     spec.summary                  = 'Debug View'
-    spec.vendored_frameworks      = 'build/cocoapods/framework/behaviour_tracker.framework'
+    spec.vendored_frameworks      = 'build/cocoapods/framework/debug_view.framework'
     spec.libraries                = 'c++'
     spec.ios.deployment_target = '12.0'
                 
                 
     spec.pod_target_xcconfig = {
         'KOTLIN_PROJECT_PATH' => ':debug_view',
-        'PRODUCT_MODULE_NAME' => 'behaviour_tracker',
+        'PRODUCT_MODULE_NAME' => 'debug_view',
     }
                 
     spec.script_phases = [
@@ -35,5 +35,5 @@ Pod::Spec.new do |spec|
             SCRIPT
         }
     ]
-    spec.resources = ['build/compose/ios/behaviour_tracker/compose-resources']
+    spec.resources = ['build/compose/ios/debug_view/compose-resources']
 end
