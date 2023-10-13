@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
     spec.name                     = 'debug_view'
-    spec.version                  = '0.0.7'
+    spec.version                  = '0.0.8'
     spec.homepage                 = 'https://idfinance.com/'
     spec.source                   = { :http=> ''}
     spec.authors                  = ''

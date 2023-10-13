@@ -8,7 +8,7 @@ plugins {
 }
 
 group = "com.idfinance.kmm"
-version = "0.0.7"
+version = "0.0.8"
 
 kotlin {
     androidTarget { publishLibraryVariants("release", "debug") }
@@ -27,15 +27,15 @@ kotlin {
                 implementation(libs.datetime)
             }
         }
-        val commonTest by getting {
-            dependencies {
-                implementation(kotlin("test"))
-            }
-        }
         val androidMain by getting {
             dependencies {
                 implementation(libs.activity.compose)
             }
+        }
+        val iosSimulatorArm64Main by getting
+        val iosMain by getting {
+            dependsOn(commonMain)
+            iosSimulatorArm64Main.dependsOn(this)
         }
     }
 
@@ -66,7 +66,9 @@ android {
 
 publishing {
     publications {
-        matching { it.name in listOf("iosArm64", "iosX64", "kotlinMultiplatform") }.all {
+        matching {
+            return@matching it.name in listOf("iosArm64", "iosX64", "kotlinMultiplatform")
+        }.all {
             val targetPublication = this@all
             tasks.withType<AbstractPublishToMaven>()
                 .matching { it.publication == targetPublication }
